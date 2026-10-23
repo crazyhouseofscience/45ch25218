@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SimulationState, EnergyWave, MeltVapor, CO2Molecule } from '../types/simulation';
-import { ZoomIn, Minimize2, Sparkles, Wind, Eye, Droplets, Info, Flame, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { SimulationState, EnergyWave, MeltVapor, CO2Molecule, MicrobeadMaterialType } from '../types/simulation';
+import { ZoomIn, Minimize2, Sparkles, Wind, Eye, Droplets, Info, Flame, AlertTriangle, ShieldCheck, Zap } from 'lucide-react';
 
 import { MicrobeadReflectionOverlay } from './MicrobeadReflectionOverlay';
 
@@ -8,6 +8,9 @@ interface GlacierCanvasProps {
   state: SimulationState;
   onUpdateIce: (newThickness: number, meltDelta: number) => void;
   onUpdateMicrobeads?: (val: number) => void;
+  onChangeMaterial?: (mat: MicrobeadMaterialType) => void;
+  onChangeCustomSpecificHeat?: (val: number) => void;
+  onFireHeatPulse?: (joules: number) => void;
   onOpenEnergyBudget?: () => void;
   onResetIce?: () => void;
 }
@@ -20,7 +23,16 @@ interface FloatingIceberg {
   vx: number;
 }
 
-export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({ state, onUpdateIce, onUpdateMicrobeads, onOpenEnergyBudget, onResetIce }) => {
+export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({
+  state,
+  onUpdateIce,
+  onUpdateMicrobeads,
+  onChangeMaterial,
+  onChangeCustomSpecificHeat,
+  onFireHeatPulse,
+  onOpenEnergyBudget,
+  onResetIce,
+}) => {
   const stateRef = useRef(state);
   stateRef.current = state;
   const onUpdateIceRef = useRef(onUpdateIce);
@@ -983,7 +995,7 @@ export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({ state, onUpdateIce
 
       {/* Conditional Radiation Legend with Explicit Wave Samples */}
       {showLegend && (
-        <div className="absolute top-16 right-4 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-xl p-3.5 shadow-xl text-xs space-y-2 max-w-xs pointer-events-auto z-30">
+        <div className="absolute top-[88px] right-4 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-xl p-3.5 shadow-xl text-xs space-y-2 max-w-xs pointer-events-auto z-30">
         <div className="font-semibold text-slate-200 tracking-wide flex items-center justify-between border-b border-slate-700/70 pb-1.5">
           <span>Radiation & Wave Pathways</span>
           <span className="text-[10px] text-rose-400 font-bold font-mono">{state.infraredTrappingPercent}% TRAPPED</span>
@@ -1228,6 +1240,8 @@ export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({ state, onUpdateIce
           </div>
         </div>
       )}
+
+
 
       {!showZoomInset && (
         <button

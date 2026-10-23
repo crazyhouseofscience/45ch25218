@@ -103,14 +103,14 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
+            <div className="flex items-center justify-between text-slate-300 text-xs font-bold">
               <span>Solar Input</span>
-              <Sun size={15} className="text-yellow-400" />
+              <Sun size={16} className="text-yellow-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-yellow-300 tabular-nums">
-              {state.solarIntensity} <span className="text-[10px] font-normal text-slate-400">W/m²</span>
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-yellow-300 tabular-nums">
+              {state.solarIntensity} <span className="text-xs font-normal text-slate-400">W/m²</span>
             </div>
-            <div className="text-[10px] text-slate-400">Shortwave (SW↓)</div>
+            <div className="text-xs font-semibold text-slate-400">Shortwave (SW↓)</div>
           </div>
         </Tooltip>
 
@@ -124,15 +124,15 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
+            <div className="flex items-center justify-between text-slate-300 text-xs font-bold">
               <span>Albedo (α)</span>
-              <ShieldCheck size={15} className="text-sky-400" />
+              <ShieldCheck size={16} className="text-sky-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-sky-300 tabular-nums">
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-sky-300 tabular-nums">
               {state.effectiveAlbedo.toFixed(2)}{' '}
-              <span className="text-[10px] font-normal text-slate-400">({albedoPercent}%)</span>
+              <span className="text-xs font-normal text-slate-400">({albedoPercent}%)</span>
             </div>
-            <div className="text-[10px] text-slate-400">
+            <div className="text-xs font-bold text-sky-300">
               {state.effectiveAlbedo > 0.75
                 ? 'High Reflection'
                 : state.effectiveAlbedo > 0.4
@@ -152,14 +152,14 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
-              <span className="font-semibold text-yellow-200">Reflected (SW↑)</span>
-              <ArrowUpRight size={15} className="text-yellow-300" />
+            <div className="flex items-center justify-between text-yellow-200 text-xs font-bold">
+              <span>Reflected (SW↑)</span>
+              <ArrowUpRight size={16} className="text-yellow-300" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-yellow-100 tabular-nums">
-              {state.reflectedSolar} <span className="text-[10px] font-normal text-slate-400">W/m²</span>
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-yellow-200 tabular-nums">
+              {state.reflectedSolar} <span className="text-xs font-normal text-slate-400">W/m²</span>
             </div>
-            <div className="text-[10px] text-emerald-300 font-medium">Escapes 100% via CO₂</div>
+            <div className="text-xs text-emerald-300 font-bold">Escapes 100% via CO₂</div>
           </div>
         </Tooltip>
 
@@ -173,14 +173,14 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
+            <div className="flex items-center justify-between text-slate-300 text-xs font-bold">
               <span>Absorbed (Q)</span>
-              <Flame size={15} className="text-amber-400" />
+              <Flame size={16} className="text-amber-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-amber-300 tabular-nums">
-              {state.absorbedEnergy} <span className="text-[10px] font-normal text-slate-400">W/m²</span>
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-amber-300 tabular-nums">
+              {state.absorbedEnergy} <span className="text-xs font-normal text-slate-400">W/m²</span>
             </div>
-            <div className="text-[10px] text-slate-400">Heats Ice Substrate</div>
+            <div className="text-xs font-semibold text-slate-400">Heats Substrate</div>
           </div>
         </Tooltip>
 
@@ -198,14 +198,14 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
               ? 'bg-rose-950/40 border-rose-600/70 shadow-[0_0_12px_rgba(244,63,94,0.2)]'
               : 'bg-slate-800/80 hover:bg-slate-800 border-slate-700/60'
           }`}>
-            <div className="flex items-center justify-between text-slate-400 text-xs">
-              <span className="font-semibold text-rose-300">Re-Radiant (LW↑)</span>
-              <Activity size={15} className="text-rose-400" />
+            <div className="flex items-center justify-between text-rose-300 text-xs font-bold">
+              <span>Re-Radiant (LW↑)</span>
+              <Activity size={16} className="text-rose-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-rose-300 tabular-nums">
-              {state.reradiantInfrared} <span className="text-[10px] font-normal text-slate-400">W/m²</span>
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-rose-300 tabular-nums">
+              {state.reradiantInfrared} <span className="text-xs font-normal text-slate-400">W/m²</span>
             </div>
-            <div className="text-[10px] text-rose-300/80 font-medium">
+            <div className="text-xs text-rose-300 font-bold">
               Absorbed: {state.absorbedEnergy} W/m²
             </div>
           </div>
@@ -221,14 +221,14 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
+            <div className="flex items-center justify-between text-slate-300 text-xs font-bold">
               <span>CO₂ Back (LW↓)</span>
-              <Wind size={15} className="text-rose-400" />
+              <Wind size={16} className="text-rose-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-rose-400 tabular-nums">
-              {state.greenhouseBackRadiation} <span className="text-[10px] font-normal text-slate-400">W/m²</span>
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-rose-400 tabular-nums">
+              {state.greenhouseBackRadiation} <span className="text-xs font-normal text-slate-400">W/m²</span>
             </div>
-            <div className="text-[10px] text-slate-400">Downward Heat Trap</div>
+            <div className="text-xs font-semibold text-slate-400">Downward Heat Trap</div>
           </div>
         </Tooltip>
 
@@ -242,15 +242,15 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
+            <div className="flex items-center justify-between text-slate-300 text-xs font-bold">
               <span>Ice Temp</span>
-              <Thermometer size={15} className="text-indigo-400" />
+              <Thermometer size={16} className="text-indigo-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-indigo-200 tabular-nums">
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-indigo-200 tabular-nums">
               {state.iceSurfaceTemp}°C{' '}
-              <span className="text-[10px] font-normal text-slate-400">({tempF}°F)</span>
+              <span className="text-xs font-normal text-slate-400">({tempF}°F)</span>
             </div>
-            <div className="text-[10px] text-slate-400">
+            <div className="text-xs font-bold text-indigo-300">
               {state.iceSurfaceTemp >= 0 ? 'Melting Active' : 'Sub-Freezing'}
             </div>
           </div>
@@ -266,16 +266,16 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
           className="w-full"
         >
           <div className="bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between h-full cursor-help transition">
-            <div className="flex items-center justify-between text-slate-400 text-xs">
+            <div className="flex items-center justify-between text-slate-300 text-xs font-bold">
               <span>Melt Rate</span>
-              <Droplets size={15} className="text-blue-400" />
+              <Droplets size={16} className="text-blue-400" />
             </div>
-            <div className="mt-1.5 font-mono text-lg font-bold text-blue-300 tabular-nums">
-              {state.meltRate} <span className="text-[10px] font-normal text-slate-400">mm/day</span>
+            <div className="mt-1.5 font-mono text-xl font-extrabold text-blue-300 tabular-nums">
+              {state.meltRate} <span className="text-xs font-normal text-slate-400">mm/day</span>
             </div>
-            <div className="text-[10px] font-medium">
+            <div className="text-xs font-bold">
               {state.iceThickness <= 0 ? (
-                <span className="text-amber-400 font-semibold">⚠️ Potential (Depleted)</span>
+                <span className="text-amber-400">⚠️ Potential (Depleted)</span>
               ) : state.meltPreventedPercent > 0 ? (
                 <span className="text-emerald-400">-{state.meltPreventedPercent}% Saved</span>
               ) : (
@@ -289,14 +289,21 @@ export const MetricsPanel: React.FC<MetricsPanelProps> = ({ state }) => {
       {/* Energy Partitioning Bar & Glacier Thickness */}
       <div className="mt-3 bg-slate-800/50 border border-slate-700/50 rounded-xl p-3">
         <div className="flex flex-wrap items-center justify-between text-xs mb-1.5 gap-2">
-          <span className="text-slate-300 font-medium">Incident Solar Energy Partitioning Budget (100% = {state.solarIntensity} W/m²):</span>
-          <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono">
-            <span className="text-yellow-300">● Reflected Sunlight ({reflectedPct}% = {state.reflectedSolar} W/m²)</span>
-            <span className="text-amber-400">● Absorbed Energy ({absorbedPct}% = {state.absorbedEnergy} W/m²)</span>
-            <span className={state.netEnergyTrappedSystem > 0 ? 'text-rose-400 font-bold' : 'text-sky-400 font-bold'}>
-              ● Net Trapped: {state.netEnergyTrappedSystem > 0 ? `+${state.netEnergyTrappedSystem}` : state.netEnergyTrappedSystem} W/m² ({state.netEnergyTrappedSystemPercent}%)
+          <div className="flex items-center gap-2">
+            <span className="text-slate-300 font-medium">Solar Energy Partitioning:</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">
+              Material c: {state.specificHeatMaterial.toFixed(2)} J/g·°C
             </span>
-            <span className="text-slate-400">● LW↑ Emitted ({state.reradiantInfrared} W/m²)</span>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">
+              1m Ice Melt: {state.timeToMelt1mHours > 9000 ? 'Stable (No Melt)' : `${state.timeToMelt1mHours} hrs`}
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono">
+            <span className="text-yellow-300">● Reflected ({reflectedPct}%)</span>
+            <span className="text-amber-400">● Absorbed ({absorbedPct}%)</span>
+            <span className={state.netEnergyTrappedSystem > 0 ? 'text-rose-400 font-bold' : 'text-sky-400 font-bold'}>
+              ● Net Trapped: {state.netEnergyTrappedSystem > 0 ? `+${state.netEnergyTrappedSystem}` : state.netEnergyTrappedSystem} W/m²
+            </span>
           </div>
         </div>
 
