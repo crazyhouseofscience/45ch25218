@@ -1,0 +1,6 @@
+{
+  "name": "Albedo & Climate Simulator",
+  "description": "Interactive simulation for students to explore albedo, light absorption, and ice melt dynamics with microbead intervention.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
