@@ -280,102 +280,83 @@ export default function Simulation() {
 
   return (
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-slate-950 font-sans">
-      {/* Top Bar following Top Bar Contract */}
-      <header className="flex items-center justify-between gap-8 px-6 py-3 border-b border-slate-800 bg-slate-900/90 shrink-0">
+      {/* Streamlined 3-Zone Top Bar - Fits 100% Zoom on All Screens */}
+      <header className="flex items-center justify-between gap-4 px-5 py-2.5 border-b border-slate-800 bg-slate-900/95 shrink-0">
+        {/* Zone 1: Brand & Version */}
         <div className="flex items-center gap-2.5 whitespace-nowrap shrink-0">
           <div className="w-8 h-8 rounded-lg bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-sky-400 shadow-sm">
             <Sparkles size={18} />
           </div>
           <div>
-            <span className="text-base font-bold tracking-tight text-white block">
-              Arctic Albedo, CO₂ & Radiant Energy Simulator
+            <span className="text-sm sm:text-base font-bold tracking-tight text-white block">
+              Arctic Albedo & Energy Simulator
             </span>
             <span className="text-[10px] text-slate-400 font-mono block">
-              Designed by Mr. Keith Chapman 2026 v. 2.2 using Google AI Studio.
+              Designed by Mr. Keith Chapman 2026 v. 2.2
             </span>
           </div>
         </div>
 
-        <nav className="hidden md:flex items-center gap-5 text-xs font-medium text-slate-300">
-          <a
-            href="https://gml.noaa.gov/education/carbon_toolkit/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-sky-300 hover:text-white transition-colors whitespace-nowrap shrink-0 flex items-center gap-1 font-semibold"
-            title="NOAA Global Monitoring Laboratory Carbon Cycle Toolkit"
-          >
-            <span>NOAA Carbon Toolkit</span>
-            <span className="text-[9px] bg-sky-500/20 text-sky-300 px-1 py-0.5 rounded border border-sky-400/30">NOAA.gov ↗</span>
-          </a>
+        {/* Zone 2: Navigation Links (Clean & Non-Duplicated) */}
+        <nav className="hidden md:flex items-center gap-4 text-xs font-semibold text-slate-300">
           <button
             onClick={() => setIsSpecificHeatOpen(true)}
-            className="hover:text-amber-300 transition-colors whitespace-nowrap shrink-0 cursor-pointer flex items-center gap-1 text-amber-400 font-semibold"
+            className="hover:text-amber-300 transition-colors whitespace-nowrap shrink-0 cursor-pointer flex items-center gap-1.5 text-amber-400 font-bold"
           >
-            <Flame size={13} className="text-amber-400" />
-            <span>Specific Heat & Melt Lab</span>
+            <Flame size={14} className="text-amber-400" />
+            <span>Specific Heat Lab</span>
           </button>
+
+          <span className="text-slate-700">|</span>
+
           <button
             onClick={() => setIsBudgetOpen(true)}
             className="hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer flex items-center gap-1.5"
           >
-            <Calculator size={13} className="text-sky-400" />
-            <span>Pierrehumbert Energy Budget</span>
+            <Calculator size={14} className="text-sky-400" />
+            <span>Energy Budget</span>
           </button>
+
+          <span className="text-slate-700">|</span>
+
           <button
-            onClick={() => setIsGuideOpen(true)}
-            className="hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            onClick={() => setIsDashboardOpen(true)}
+            className="hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer flex items-center gap-1.5"
           >
-            UCAR: How CO₂ Traps Infrared
+            <BarChart2 size={14} className="text-sky-400" />
+            <span>Telemetry</span>
           </button>
-          <button
-            onClick={() => setIsGuideOpen(true)}
-            className="hover:text-white transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+
+          <span className="text-slate-700">|</span>
+
+          <a
+            href="https://gml.noaa.gov/education/carbon_toolkit/"
+            target="_blank"
+            rel="noreferrer"
+            className="text-sky-300 hover:text-white transition-colors whitespace-nowrap shrink-0 flex items-center gap-1"
+            title="NOAA Global Monitoring Laboratory Carbon Cycle Toolkit"
           >
-            Ice-Albedo Positive Feedback
-          </button>
+            <span>NOAA Toolkit ↗</span>
+          </a>
         </nav>
 
-        <div className="flex items-center gap-2.5 shrink-0">
-          <button
-            onClick={() => setIsSpecificHeatOpen(true)}
-            className="px-3 py-1.5 text-xs font-semibold text-amber-200 bg-amber-950/70 hover:bg-amber-900 border border-amber-700/70 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
-            title="Open Specific Heat & Glacier Melt Interactive Lab"
-          >
-            <Flame size={14} className="text-amber-400" />
-            <span className="hidden sm:inline">Specific Heat Lab</span>
-          </button>
-
+        {/* Zone 3: Actions */}
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={handleResetAll}
-            className="px-3 py-1.5 text-xs font-semibold text-rose-200 bg-rose-950/70 hover:bg-rose-900 border border-rose-700/70 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 text-xs font-bold text-rose-200 bg-rose-950/80 hover:bg-rose-900 border border-rose-800 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1 cursor-pointer"
             title="Reset all simulation parameters to defaults"
           >
-            <RotateCcw size={14} className="text-rose-400" />
+            <RotateCcw size={13} className="text-rose-400" />
             <span>Reset All</span>
           </button>
 
           <button
-            onClick={() => setIsDashboardOpen(true)}
-            className="px-3 py-1.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
-          >
-            <BarChart2 size={14} className="text-sky-400" />
-            <span className="hidden sm:inline">Telemetry Dashboard</span>
-          </button>
-
-          <button
-            onClick={() => setIsBudgetOpen(true)}
-            className="px-3 py-1.5 text-xs font-semibold text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
-          >
-            <Calculator size={14} className="text-sky-400" />
-            <span className="hidden sm:inline">Energy Budget</span>
-          </button>
-
-          <button
             onClick={() => setIsGuideOpen(true)}
-            className="px-3.5 py-1.5 text-xs font-semibold text-white bg-sky-600 hover:bg-sky-500 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-1.5 text-xs font-bold text-white bg-sky-600 hover:bg-sky-500 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer"
           >
             <BookOpen size={14} />
-            <span>Student Guide & Lab</span>
+            <span>Student Guide & Science</span>
           </button>
         </div>
       </header>
