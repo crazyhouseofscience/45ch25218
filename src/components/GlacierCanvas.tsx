@@ -922,35 +922,43 @@ export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({
     <div className="relative w-full h-full min-h-[460px] bg-slate-950 overflow-hidden select-none">
       <canvas ref={canvasRef} className="w-full h-full block" />
 
-      {/* Clean Canvas Toolbar to Toggle Overlays & keep view pristine */}
-      <div className="absolute top-4 left-4 z-30 flex items-center gap-1.5 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 rounded-xl p-1.5 shadow-lg text-xs pointer-events-auto">
+      {/* High-Visibility Stage Toolbar for Students */}
+      <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-2xl p-2 shadow-2xl pointer-events-auto">
+        {/* Prominent Radiation Legend Button */}
+        <button
+          onClick={() => setShowLegend(!showLegend)}
+          className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-black transition flex items-center gap-2 cursor-pointer shadow-lg active:scale-95 ${
+            showLegend
+              ? 'bg-amber-400 text-slate-950 ring-2 ring-amber-300'
+              : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-slate-950 ring-2 ring-amber-400/80 animate-pulse'
+          }`}
+          title="Click to view color legend explaining solar rays, heat waves & CO2 trapping!"
+        >
+          <Info size={16} className="fill-slate-950 text-amber-400" />
+          <span>📖 Radiation Legend</span>
+        </button>
+
         <button
           onClick={() => setShowMicrobeadOverlay(!showMicrobeadOverlay)}
-          className={`px-2.5 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 cursor-pointer ${
-            showMicrobeadOverlay ? 'bg-sky-500 text-white font-bold shadow-sm' : 'bg-slate-800 text-slate-300 hover:text-white'
+          className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+            showMicrobeadOverlay
+              ? 'bg-sky-500 text-white shadow-md'
+              : 'bg-slate-800 text-sky-300 hover:bg-slate-700 hover:text-white border border-slate-700'
           }`}
         >
-          <Sparkles size={13} />
+          <Sparkles size={15} />
           <span>Shield Overlay</span>
         </button>
 
         <button
-          onClick={() => setShowLegend(!showLegend)}
-          className={`px-2.5 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 cursor-pointer ${
-            showLegend ? 'bg-sky-500 text-white font-bold shadow-sm' : 'bg-slate-800 text-slate-300 hover:text-white'
-          }`}
-        >
-          <Info size={13} />
-          <span>Radiation Legend</span>
-        </button>
-
-        <button
           onClick={() => setShowZoomInset(!showZoomInset)}
-          className={`px-2.5 py-1.5 rounded-lg font-medium transition flex items-center gap-1.5 cursor-pointer ${
-            showZoomInset ? 'bg-sky-500 text-white font-bold shadow-sm' : 'bg-slate-800 text-slate-300 hover:text-white'
+          className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+            showZoomInset
+              ? 'bg-sky-500 text-white shadow-md'
+              : 'bg-slate-800 text-sky-300 hover:bg-slate-700 hover:text-white border border-slate-700'
           }`}
         >
-          <ZoomIn size={13} />
+          <ZoomIn size={15} />
           <span>Micro View</span>
         </button>
       </div>
@@ -967,9 +975,9 @@ export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({
 
       {/* Depleted Ice Callout Overlay with One-Click Restore */}
       {state.iceThickness <= 0 && (
-        <div className="absolute top-16 left-1/2 -translate-x-1/2 bg-slate-900/95 border-2 border-rose-500/80 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl flex items-center gap-4 text-xs text-rose-100 z-30 pointer-events-auto">
-          <div className="w-9 h-9 rounded-xl bg-rose-500/20 border border-rose-500/50 flex items-center justify-center shrink-0 text-rose-400">
-            <AlertTriangle size={20} />
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-slate-900/95 border-2 border-rose-500/80 backdrop-blur-md rounded-2xl p-4 shadow-2xl flex items-center gap-4 text-xs text-rose-100 z-30 pointer-events-auto">
+          <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/50 flex items-center justify-center shrink-0 text-rose-400">
+            <AlertTriangle size={22} />
           </div>
           <div>
             <div className="font-bold text-sm text-white flex items-center gap-2">
@@ -978,14 +986,14 @@ export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({
                 Melt Rate: {state.meltRate} mm/day
               </span>
             </div>
-            <p className="text-slate-300 text-[11px] mt-0.5">
+            <p className="text-slate-300 text-xs mt-0.5">
               Dark bedrock is absorbing 90% heat. Use sliders or click Restore to simulate fresh ice.
             </p>
           </div>
           {onResetIce && (
             <button
               onClick={onResetIce}
-              className="px-3.5 py-1.5 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl shadow-lg transition cursor-pointer whitespace-nowrap text-xs flex items-center gap-1.5"
+              className="px-4 py-2 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl shadow-lg transition cursor-pointer whitespace-nowrap text-xs flex items-center gap-1.5"
             >
               <span>↺ Restore Ice</span>
             </button>
@@ -993,111 +1001,139 @@ export const GlacierCanvas: React.FC<GlacierCanvasProps> = ({
         </div>
       )}
 
-      {/* Conditional Radiation Legend with Explicit Wave Samples */}
-      {showLegend && (
-        <div className="absolute top-[88px] right-4 bg-slate-900/95 backdrop-blur-md border border-slate-700/70 rounded-xl p-3.5 shadow-xl text-xs space-y-2 max-w-xs pointer-events-auto z-30">
-        <div className="font-semibold text-slate-200 tracking-wide flex items-center justify-between border-b border-slate-700/70 pb-1.5">
-          <span>Radiation & Wave Pathways</span>
-          <span className="text-[10px] text-rose-400 font-bold font-mono">{state.infraredTrappingPercent}% TRAPPED</span>
+      {/* Persistent Canvas Radiation Key Bar (Always Visible at Bottom Center of Stage) */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-xl p-2 px-3 flex items-center gap-3 text-xs shadow-xl pointer-events-auto flex-wrap justify-center">
+        <div className="flex items-center gap-1 text-slate-300 font-bold">
+          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+          <span className="text-yellow-300 font-mono">SW↓ Solar</span>
         </div>
-
-        <div className="space-y-2 text-slate-300">
-          {/* Solar shortwave */}
-          <div className="flex items-start gap-2">
-            <div className="w-5 h-2.5 mt-0.5 flex items-center justify-center">
-              <svg className="w-5 h-2.5" viewBox="0 0 20 8">
-                <path d="M 0 4 Q 2.5 1 5 4 T 10 4 T 15 4 T 20 4" fill="none" stroke="#facc15" strokeWidth="2" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-yellow-300">1. Solar Shortwave (SW↓)</span>
-                <span className="font-mono text-yellow-200 font-bold">{state.solarIntensity} W/m²</span>
-              </div>
-              <p className="text-[10px] text-slate-400">Tight yellow waves from Sun</p>
-            </div>
-          </div>
-
-          {/* Reflected Shortwave */}
-          <div className="flex items-start gap-2">
-            <div className="w-5 h-2.5 mt-0.5 flex items-center justify-center">
-              <svg className="w-5 h-2.5" viewBox="0 0 20 8">
-                <path d="M 0 4 Q 2.5 1 5 4 T 10 4 T 15 4 T 20 4" fill="none" stroke="#fef08a" strokeWidth="2" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-yellow-100">2. Reflected Sunlight (SW↑)</span>
-                <span className="font-mono text-yellow-100 font-bold">{state.reflectedSolar} W/m²</span>
-              </div>
-              <p className="text-[10px] text-emerald-300 font-medium">
-                ✨ 100% Escapes through CO₂ into space!
-              </p>
-              <p className="text-[9px] text-slate-400">
-                NOAA Principle: CO₂ is transparent to solar light
-              </p>
-            </div>
-          </div>
-
-          {/* Re-radiant Longwave Infrared */}
-          <div className="flex items-start gap-2">
-            <div className="w-5 h-2.5 mt-0.5 flex items-center justify-center">
-              <svg className="w-5 h-2.5" viewBox="0 0 20 8">
-                <path d="M 0 4 Q 5 0 10 4 T 20 4" fill="none" stroke="#ef4444" strokeWidth="2.8" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-rose-400">3. Re-Radiant Infrared (LW↑)</span>
-                <span className="font-mono text-rose-300 font-bold">{state.reradiantInfrared} W/m²</span>
-              </div>
-              <p className="text-[10px] text-amber-200 font-medium">
-                🔴 Solar Absorbed: {state.absorbedEnergy} W/m² ➔ Converted to Heat
-              </p>
-              <p className="text-[9px] text-slate-400">
-                More microbeads ➔ Less absorbed ➔ Less re-radiation
-              </p>
-            </div>
-          </div>
-
-          {/* Greenhouse Back-radiation */}
-          <div className="flex items-start gap-2">
-            <div className="w-5 h-2.5 mt-0.5 flex items-center justify-center">
-              <svg className="w-5 h-2.5" viewBox="0 0 20 8">
-                <path d="M 0 4 Q 5 0 10 4 T 20 4" fill="none" stroke="#ea580c" strokeWidth="2.2" />
-              </svg>
-            </div>
-            <div className="flex-1">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-orange-400">4. CO₂ Back-Radiation (LW↓)</span>
-                <span className="font-mono text-orange-300 font-bold">{state.greenhouseBackRadiation} W/m²</span>
-              </div>
-              <p className="text-[10px] text-slate-400">Trapped by CO₂ & radiated back down</p>
-            </div>
-          </div>
+        <span className="text-slate-600">|</span>
+        <div className="flex items-center gap-1 text-slate-300 font-bold">
+          <span className="w-2.5 h-2.5 rounded-full bg-yellow-100" />
+          <span className="text-yellow-100 font-mono">SW↑ Reflected</span>
         </div>
-
-        {/* Live Trapping breakdown */}
-        <div className="pt-2 border-t border-slate-700/70 space-y-1 text-[11px]">
-          <div className="flex justify-between">
-            <span className="text-rose-300 font-medium">Infrared Trapped:</span>
-            <span className="font-mono font-bold text-rose-400">{state.infraredTrapped} W/m² ({state.infraredTrappingPercent}%)</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-slate-400">Infrared Escapes Space:</span>
-            <span className="font-mono text-slate-300">{state.infraredEscapingToSpace} W/m²</span>
-          </div>
-          <div className="flex justify-between text-yellow-200/90 pt-0.5 border-t border-slate-800">
-            <span>Total Escaping to Space:</span>
-            <span className="font-mono font-bold text-yellow-300">{state.reflectedSolar + state.infraredEscapingToSpace} W/m²</span>
-          </div>
+        <span className="text-slate-600">|</span>
+        <div className="flex items-center gap-1 text-slate-300 font-bold">
+          <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+          <span className="text-rose-300 font-mono">LW↑ Heat</span>
         </div>
-
-        {/* NOAA Educational Principle Card */}
-        <div className="p-2 bg-sky-950/50 border border-sky-800/50 rounded-lg text-[10px] text-sky-200 leading-tight">
-          <span className="font-bold text-sky-300">NOAA Carbon Cycle Toolkit:</span> As microbeads increase, solar light reflects directly and escapes through CO₂ unhindered. This leaves virtually no absorbed heat to re-radiate as infrared, preventing greenhouse warming!
+        <span className="text-slate-600">|</span>
+        <div className="flex items-center gap-1 text-slate-300 font-bold">
+          <span className="w-2.5 h-2.5 rounded-full bg-orange-500" />
+          <span className="text-orange-300 font-mono">LW↓ CO₂ Trap</span>
         </div>
       </div>
+
+      {/* Large, Easy-to-Read Radiation Legend Popover */}
+      {showLegend && (
+        <div className="absolute top-[76px] left-4 bg-slate-900/98 backdrop-blur-md border-2 border-amber-400/80 rounded-2xl p-4 shadow-2xl text-xs space-y-3 w-88 sm:w-96 pointer-events-auto z-30">
+          <div className="font-extrabold text-sm text-white tracking-wide flex items-center justify-between border-b border-amber-500/40 pb-2">
+            <span className="flex items-center gap-1.5 text-amber-300">
+              📖 Stage Radiation & Wave Color Key
+            </span>
+            <span className="text-xs text-rose-300 font-bold font-mono px-2 py-0.5 rounded bg-rose-950 border border-rose-800">
+              {state.infraredTrappingPercent}% TRAPPED
+            </span>
+          </div>
+
+          <div className="space-y-2.5 text-slate-200">
+            {/* 1. Solar shortwave */}
+            <div className="p-2.5 bg-slate-950/80 border border-slate-800 rounded-xl flex items-start gap-2.5">
+              <div className="w-6 h-4 mt-0.5 flex items-center justify-center shrink-0">
+                <svg className="w-6 h-4" viewBox="0 0 24 10">
+                  <path d="M 0 5 Q 3 1 6 5 T 12 5 T 18 5 T 24 5" fill="none" stroke="#facc15" strokeWidth="2.5" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-yellow-300 text-xs">1. Solar Shortwave (SW↓)</span>
+                  <span className="font-mono text-yellow-200 font-bold text-xs">{state.solarIntensity} W/m²</span>
+                </div>
+                <p className="text-xs text-slate-300 mt-0.5">Tight yellow wave packets coming down from the Sun.</p>
+              </div>
+            </div>
+
+            {/* 2. Reflected Shortwave */}
+            <div className="p-2.5 bg-slate-950/80 border border-slate-800 rounded-xl flex items-start gap-2.5">
+              <div className="w-6 h-4 mt-0.5 flex items-center justify-center shrink-0">
+                <svg className="w-6 h-4" viewBox="0 0 24 10">
+                  <path d="M 0 5 Q 3 1 6 5 T 12 5 T 18 5 T 24 5" fill="none" stroke="#fef08a" strokeWidth="2.5" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-yellow-100 text-xs">2. Reflected Sunlight (SW↑)</span>
+                  <span className="font-mono text-yellow-100 font-bold text-xs">{state.reflectedSolar} W/m²</span>
+                </div>
+                <p className="text-xs text-emerald-300 font-bold mt-0.5">
+                  ✨ 100% Escapes through CO₂ blanket into outer space!
+                </p>
+                <p className="text-[11px] text-slate-400">
+                  NOAA Principle: CO₂ is transparent to solar light.
+                </p>
+              </div>
+            </div>
+
+            {/* 3. Re-radiant Longwave Infrared */}
+            <div className="p-2.5 bg-slate-950/80 border border-slate-800 rounded-xl flex items-start gap-2.5">
+              <div className="w-6 h-4 mt-0.5 flex items-center justify-center shrink-0">
+                <svg className="w-6 h-4" viewBox="0 0 24 10">
+                  <path d="M 0 5 Q 6 0 12 5 T 24 5" fill="none" stroke="#ef4444" strokeWidth="3" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-rose-400 text-xs">3. Re-Radiant Infrared (LW↑)</span>
+                  <span className="font-mono text-rose-300 font-bold text-xs">{state.reradiantInfrared} W/m²</span>
+                </div>
+                <p className="text-xs text-amber-200 font-medium mt-0.5">
+                  🔴 Solar Absorbed: {state.absorbedEnergy} W/m² ➔ Converted into heat.
+                </p>
+                <p className="text-[11px] text-slate-400">
+                  More microbeads ➔ Less absorbed ➔ Less infrared heat emitted!
+                </p>
+              </div>
+            </div>
+
+            {/* 4. Greenhouse Back-radiation */}
+            <div className="p-2.5 bg-slate-950/80 border border-slate-800 rounded-xl flex items-start gap-2.5">
+              <div className="w-6 h-4 mt-0.5 flex items-center justify-center shrink-0">
+                <svg className="w-6 h-4" viewBox="0 0 24 10">
+                  <path d="M 0 5 Q 6 0 12 5 T 24 5" fill="none" stroke="#ea580c" strokeWidth="2.6" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-orange-400 text-xs">4. CO₂ Back-Radiation (LW↓)</span>
+                  <span className="font-mono text-orange-300 font-bold text-xs">{state.greenhouseBackRadiation} W/m²</span>
+                </div>
+                <p className="text-xs text-slate-300 mt-0.5">Infrared heat trapped by CO₂ and radiated back down.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Live Trapping breakdown */}
+          <div className="pt-2 border-t border-slate-800 space-y-1.5 text-xs font-semibold">
+            <div className="flex justify-between">
+              <span className="text-rose-300 font-bold">Infrared Trapped by CO₂:</span>
+              <span className="font-mono font-bold text-rose-400">{state.infraredTrapped} W/m² ({state.infraredTrappingPercent}%)</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-300">Infrared Escapes Space:</span>
+              <span className="font-mono text-slate-200">{state.infraredEscapingToSpace} W/m²</span>
+            </div>
+            <div className="flex justify-between text-yellow-200 pt-1 border-t border-slate-800">
+              <span>Total Escaping to Space:</span>
+              <span className="font-mono font-bold text-yellow-300">{state.reflectedSolar + state.infraredEscapingToSpace} W/m²</span>
+            </div>
+          </div>
+
+          {/* NOAA Educational Principle Card */}
+          <div className="p-3 bg-sky-950/70 border border-sky-800/60 rounded-xl text-xs text-sky-100 leading-relaxed">
+            <span className="font-bold text-sky-300 block mb-0.5">📘 NOAA Carbon Cycle Toolkit:</span>
+            When microbeads are applied, sunlight reflects directly as shortwave light and escapes CO₂ unhindered. This leaves virtually no absorbed heat to turn into infrared, halting greenhouse warming!
+          </div>
+        </div>
       )}
 
       {/* Picture-in-Picture: Microscopic Surface & CO2 Inspector */}

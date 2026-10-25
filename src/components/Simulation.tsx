@@ -291,7 +291,7 @@ export default function Simulation() {
               Arctic Albedo, CO₂ & Radiant Energy Simulator
             </span>
             <span className="text-[10px] text-slate-400 font-mono block">
-              Designed by Mr. Keith Chapman 2026 v. 2.0 using Google AI Studio.
+              Designed by Mr. Keith Chapman 2026 v. 2.2 using Google AI Studio.
             </span>
           </div>
         </div>
@@ -384,100 +384,7 @@ export default function Simulation() {
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
         {/* Left: Interactive Canvas & Live Metrics */}
         <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
-          {/* Chromebook Quick Control Strip - High Visibility for Albedo, Microbeads & Solar */}
-          <div className="bg-slate-900 border-b border-slate-800 p-2 px-4 flex flex-wrap items-center justify-between gap-2 shrink-0 z-10 shadow-md">
-            {/* Quick Albedo Controls */}
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="font-bold text-sky-300 whitespace-nowrap">🧊 Ice Albedo:</span>
-              <div className="flex items-center bg-slate-950 rounded-lg p-0.5 border border-slate-700">
-                <button
-                  onClick={() => handleIceConditionChange('pristine')}
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer whitespace-nowrap ${
-                    state.iceCondition === 'pristine' ? 'bg-sky-500 text-white shadow' : 'text-slate-300 hover:text-white'
-                  }`}
-                  title="Pristine Snowpack (Albedo 0.76)"
-                >
-                  ❄️ Pristine (0.76)
-                </button>
-                <button
-                  onClick={() => handleIceConditionChange('aged')}
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer whitespace-nowrap ${
-                    state.iceCondition === 'aged' ? 'bg-sky-500 text-white shadow' : 'text-slate-300 hover:text-white'
-                  }`}
-                  title="Aged Glacial Ice (Albedo 0.42)"
-                >
-                  🧊 Aged (0.42)
-                </button>
-                <button
-                  onClick={() => handleIceConditionChange('soot')}
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer whitespace-nowrap ${
-                    state.iceCondition === 'soot' ? 'bg-rose-500 text-white shadow' : 'text-slate-300 hover:text-white'
-                  }`}
-                  title="Dark Soot Deposits (Albedo 0.22)"
-                >
-                  🌋 Dark Soot (0.22)
-                </button>
-              </div>
-            </div>
 
-            {/* Quick Microbead Shield Controls */}
-            <div className="flex items-center gap-1.5 text-xs">
-              <span className="font-bold text-yellow-300 whitespace-nowrap">🔮 Microbeads Shield:</span>
-              <div className="flex items-center bg-slate-950 rounded-lg p-0.5 border border-slate-700">
-                <button
-                  onClick={() => handleMicrobeadsChange(0)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer whitespace-nowrap ${
-                    state.microbeadDensity === 0 ? 'bg-amber-500 text-slate-950 shadow' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  0% (Off)
-                </button>
-                <button
-                  onClick={() => handleMicrobeadsChange(50)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer whitespace-nowrap ${
-                    state.microbeadDensity === 50 ? 'bg-yellow-400 text-slate-950 shadow' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  50%
-                </button>
-                <button
-                  onClick={() => handleMicrobeadsChange(100)}
-                  className={`px-2.5 py-1 rounded-md text-xs font-bold transition cursor-pointer whitespace-nowrap ${
-                    state.microbeadDensity === 100 ? 'bg-sky-400 text-slate-950 shadow' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  100% Shield
-                </button>
-              </div>
-            </div>
-
-            {/* Quick Solar Transmission Controls */}
-            <div className="hidden xl:flex items-center gap-1.5 text-xs">
-              <span className="font-bold text-amber-300 whitespace-nowrap">☀️ Solar Power:</span>
-              <div className="flex items-center bg-slate-950 rounded-lg p-0.5 border border-slate-700">
-                {[300, 700, 1000].map((sVal) => (
-                  <button
-                    key={sVal}
-                    onClick={() => handleSolarChange(sVal)}
-                    className={`px-2 py-1 rounded-md text-xs font-mono font-bold transition cursor-pointer ${
-                      state.solarIntensity === sVal ? 'bg-amber-500 text-slate-950' : 'text-slate-300 hover:text-white'
-                    }`}
-                  >
-                    {sVal} W/m²
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Specific Heat Trigger */}
-            <button
-              onClick={() => setIsSpecificHeatOpen(true)}
-              className="px-3 py-1 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow transition cursor-pointer flex items-center gap-1"
-            >
-              <Flame size={13} className="fill-slate-950" />
-              <span>Specific Heat Lab ↗</span>
-            </button>
-          </div>
 
           {/* Glacier Canvas Stage */}
           <div className="flex-1 relative min-h-0 overflow-hidden">
